@@ -6,19 +6,30 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import {CoreModule} from "./core/core.module";
 import {MainviewComponent} from "./account/mainview/mainview.component";
+import {MaterialModule} from "@angular/material";
+import {SidenavComponent} from "./shared/sidenav.component";
+import {GrouplistComponent} from "./account/grouplist/grouplist.component";
+import {AccountService} from "./account/shared/account.service";
+import {TBHttpService} from "./core/tbhttp.service";
 
 @NgModule({
   declarations: [
     AppComponent,
-    MainviewComponent
+    MainviewComponent,
+    SidenavComponent,
+    GrouplistComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    CoreModule
+    CoreModule,
+    MaterialModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    AccountService,
+    TBHttpService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

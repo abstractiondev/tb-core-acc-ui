@@ -1,0 +1,25 @@
+{
+  "Memberships": [
+    {
+      "GroupID": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa",
+      "Role": "Viewer",
+      "Details": {
+        "GroupName": "Group 1 name"
+      }
+    },
+    {
+      "GroupID": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbb",
+      "Role": "Collaborator",
+      "Details": {
+        "GroupName": "Group 2 name"
+      }
+    },
+    {
+      "GroupID": "cccccccc-cccc-cccc-cccc-cccccccccc",
+      "Role": "Collaborator",
+      "Details": {
+        "GroupName": "Group 3 name"
+      }
+    }
+  ]
+}
