@@ -7,4 +7,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app works!';
+
+  async testingCompiler() {
+    await this.callee();
+  }
+
+  async callee() {
+
+  }
 }
