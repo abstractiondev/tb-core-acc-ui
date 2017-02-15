@@ -11,6 +11,8 @@ import {SidenavComponent} from "./shared/sidenav.component";
 import {GrouplistComponent} from "./account/grouplist/grouplist.component";
 import {AccountService} from "./account/shared/account.service";
 import {TBHttpService} from "./core/tbhttp.service";
+import {TheBallInterfaceService} from "./tbinterface/TheBallInterface.nggen";
+import {TheBallService} from "./tbinterface/theball.service";
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import {TBHttpService} from "./core/tbhttp.service";
   ],
   providers: [
     AccountService,
-    TBHttpService
+    TBHttpService,
+    TheBallInterfaceService,
+    TheBallService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,5 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {AccountService} from "../shared/account.service";
+import {AccountMembershipItem} from "../../tbinterface/TheBallInterface.nggen";
 
 @Component({
   moduleId: module.id,
@@ -14,7 +15,7 @@ export class GrouplistComponent implements OnInit {
     return 0;
   }
 
-  membershipData:any;
+  membershipData:AccountMembershipItem[];
 
   constructor(private accountService:AccountService)
   {

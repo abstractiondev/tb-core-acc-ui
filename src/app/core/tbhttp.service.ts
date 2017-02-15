@@ -18,7 +18,7 @@ export class TBHttpService {
     }
   }
 
-  async getData(url:string) : Promise<any> {
+  async getData<T>(url:string) : Promise<T> {
     let fullUrl = this.dataPrefixPath + url;
     let response = await this.http.get(fullUrl).toPromise();
     let jsonData = response.json();
