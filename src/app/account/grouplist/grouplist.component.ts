@@ -1,6 +1,9 @@
 import {Component, OnInit} from "@angular/core";
 import {AccountService} from "../shared/account.service";
-import {AccountMembershipItem} from "../../tbinterface/TheBallInterface.nggen";
+import {
+  AccountMembershipItem, TheBallInterfaceService,
+  InterfaceJSONData, GroupDetails
+} from "../../tbinterface/TheBallInterface.nggen";
 
 @Component({
   moduleId: module.id,
@@ -17,12 +20,30 @@ export class GrouplistComponent implements OnInit {
 
   membershipData:AccountMembershipItem[];
 
-  constructor(private accountService:AccountService)
+  constructor(private accountService:AccountService, private tbService:TheBallInterfaceService)
   {
 
   }
 
-
-
-
+  async TestOperations() : Promise<any> {
+    console.log("Doing thing");
+    let firstStore = this.tbService.SaveInterfaceJSON(new InterfaceJSONData({
+      Name: "MyData",
+      Data: { "Some": "Stuff"}
+    }));
+    let secondStore = this.tbService.SaveInterfaceJSON(new InterfaceJSONData({
+      Name: "MyData2",
+      Data: { "Some": "Stuff"}
+    }));
+    let thirdFail = this.tbService.SaveGroupDetails(new GroupDetails({
+      GroupName: "Errors..."
+    })).catch(data => {
+      console.log("Precatch: " + JSON.stringify(data));
+    });
+    let results = await Promise.all([ firstStore, secondStore, thirdFail ])
+      .catch(data => {
+        console.log("Catching: " + JSON.stringify(data));
+      });
+    console.log("Done thing: " + JSON.stringify(results));
+  }
 }

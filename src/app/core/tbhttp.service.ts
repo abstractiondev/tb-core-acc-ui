@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {Http, Headers} from "@angular/http";
+import {Http, Headers, RequestOptionsArgs} from "@angular/http";
 import "rxjs/add/operator/toPromise"
 import {environment} from "../../environments/environment";
 
@@ -25,5 +25,24 @@ export class TBHttpService {
     return jsonData;
   }
 
+  async getDataWithResponse(url:string) : Promise<any> {
+    let fullUrl = this.dataPrefixPath + url;
+    let response = await this.http.get(fullUrl).toPromise();
+    let data = response.json();
+    return {
+      response: response,
+      data: data
+    };
+  }
+
+  async postJSONData<T>(url:string, data?:any) : Promise<T> {
+    let body = JSON.stringify(data);
+    let headers = new Headers();
+    headers.append("Content-Type", "application/json");
+    let options:RequestOptionsArgs= { headers: headers};
+    let response = await this.http.post(url, body, options).toPromise();
+    let jsonData = response.json();
+    return jsonData;
+  }
 
 }
