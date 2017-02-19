@@ -1,0 +1,26 @@
+message HttpOperationData {
+  required string OperationName = 1;
+  required string OperationRequestPath = 2;
+  repeated KeyValuePairStringString QueryParameters = 3;
+  repeated KeyValuePairStringString FormValues = 4;
+  repeated KeyValuePairParamNameFileNameBinary FileCollection = 5;
+  required bytes RequestContent = 6;
+  required string ExecutorAccountID = 7;
+  required string OwnerRootLocation = 8;
+  required string EnvironmentName = 9;
+}
+
+message KeyValuePairStringString {
+  required string Key = 1;
+  required string Value = 2;
+}
+
+message KeyValuePairParamNameFileNameBinary {
+  required string ParamName = 1;
+  required FileNameBinary Value = 2;
+}
+
+message FileNameBinary {
+  required string FileName = 1;
+  required bytes Data = 2;
+}

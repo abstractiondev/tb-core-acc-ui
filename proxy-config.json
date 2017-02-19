@@ -1,6 +1,6 @@
 {
-  "/api": {
-    "target": "https://home.theball.me",
+  "/receive": {
+    "target": "http://localhost:8080",
     "secure": true
   }
 }
