@@ -1,0 +1,6 @@
+{
+  "/api": {
+    "target": "https://home.theball.me",
+    "secure": true
+  }
+}
