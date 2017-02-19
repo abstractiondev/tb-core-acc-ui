@@ -13,6 +13,7 @@ import {AccountService} from "./account/shared/account.service";
 import {TBHttpService} from "./core/tbhttp.service";
 import {TheBallInterfaceService} from "./tbinterface/TheBallInterface.nggen";
 import {TheBallService} from "./tbinterface/theball.service";
+import {AlertModule} from "ng2-bootstrap"
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import {TheBallService} from "./tbinterface/theball.service";
     FormsModule,
     HttpModule,
     CoreModule,
-    MaterialModule.forRoot()
+    MaterialModule.forRoot(),
+    AlertModule.forRoot()
   ],
   providers: [
     AccountService,
