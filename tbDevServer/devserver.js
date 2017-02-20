@@ -6,8 +6,9 @@
 // dev-server.js
 const express = require('express');
 const app = express();
-const fs = require("file-system");
+const fs = require("fs-extra");
 const protobuf = require("protobufjs");
+
 // Import routes
 //require('./_routes')(app);   // <-- or whatever you do to include your API endpoints and middleware
 app.set('port', 8080);
@@ -23,13 +24,24 @@ app.use(express.static(__dirname + '/public'));
 
 var httpOperationDataMessage;
 
-protobuf.load("tbDevServer/tb.proto", function(err, root) {
+fs.remove("src/devemu/TBRoot", function(err) {
+  if(err)
+    return console.error(err);
+  fs.copy("src/data/TBRoot", "src/devemu/TBRoot", function(err) {
+    if(err)
+      return console.error(err);
+    console.log("TBRoot copy done");
+  });
+});
+
+
+protobuf.load("tbdevserver/tb.proto", function(err, root) {
   if(err)
     throw err;
   httpOperationDataMessage = root.lookup("HttpOperationData");
 });
 
-app.post('/receive', function(request, respond) {
+app.post('/postback', function(request, respond) {
   console.log("Posting...");
   var body = '';
   var filePath = __dirname + '/public/data.txt';

@@ -1,5 +1,5 @@
 export const environment = {
   production: false,
-  dataUrlPrefix: "../../",
+  dataUrlPrefix: "/data/TBRoot/",
   postbackUrlPrefix: ""
 };

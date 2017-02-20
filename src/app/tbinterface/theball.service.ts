@@ -7,7 +7,7 @@ export class TheBallService {
   }
 
   async ExecuteOperation(operationFullName:string, operationParameters?:any) {
-    let postDataUrl = "/receive?operation=" + operationFullName;
+    let postDataUrl = "?operation=" + operationFullName;
     let data = operationParameters;
     let operationData:any = await this.httpService.postJSONData(postDataUrl, data);
     let operationID = operationData.OperationID;
