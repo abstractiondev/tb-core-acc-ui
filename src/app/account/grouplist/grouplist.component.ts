@@ -29,6 +29,18 @@ export class GrouplistComponent implements OnInit {
     console.log("Doing thing");
     let firstStore = this.tbService.SaveInterfaceJSON(new InterfaceJSONData({
       Name: "MyData",
+      Data: {"Some": "Stuff"}
+    }));
+    firstStore.then(() => {
+      console.log("Done then");
+    });
+    console.log("Waiting for then");
+  }
+
+    async TestOperations2() : Promise<any> {
+    console.log("Doing thing");
+    let firstStore = this.tbService.SaveInterfaceJSON(new InterfaceJSONData({
+      Name: "MyData",
       Data: { "Some": "Stuff"}
     }));
     let secondStore = this.tbService.SaveInterfaceJSON(new InterfaceJSONData({

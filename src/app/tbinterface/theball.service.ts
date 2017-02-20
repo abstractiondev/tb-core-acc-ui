@@ -1,9 +1,12 @@
 import {Injectable} from "@angular/core";
 import {TBHttpService} from "../core/tbhttp.service";
+import {environment} from "../../environments/environment";
 
 @Injectable()
 export class TheBallService {
+  private accept404AsOk: boolean;
   constructor(private httpService:TBHttpService) {
+    this.accept404AsOk = !environment.production;
   }
 
   async ExecuteOperation(operationFullName:string, operationParameters?:any) {
@@ -44,7 +47,13 @@ export class TheBallService {
           }
         })
         .catch(errData => {
-          rejecter(errData);
+          console.log(JSON.stringify(errData));
+          if(this.accept404AsOk && errData.status == 404) {
+            resolver();
+            console.warn("Development mode accepted 404 as OK");
+          }
+          else
+            rejecter(errData);
         });
     };
     pollFunc(pollFunc, pollResolve, pollReject);

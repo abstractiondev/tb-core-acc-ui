@@ -2,5 +2,9 @@
   "/postback": {
     "target": "http://localhost:8080",
     "secure": true
+  },
+  "/devemu/TBRoot": {
+    "target": "http://localhost:8080",
+    "secure": true
   }
 }

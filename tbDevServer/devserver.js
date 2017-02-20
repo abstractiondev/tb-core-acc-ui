@@ -15,25 +15,25 @@ app.set('port', 8080);
 app.listen(app.get('port'), function() {
   console.log('Node App Started');
 });
-app.get("/", function(req, res) {
-  res.send("Hello world!");
-});
 
-app.use('/public', express.static(__dirname + '/public'));
-app.use(express.static(__dirname + '/public'));
 
-var httpOperationDataMessage;
+app.use('/devemu/TBRoot', express.static(__dirname + '/devemu/TBRoot'));
 
-fs.remove("src/devemu/TBRoot", function(err) {
+fs.remove(__dirname + "/devemu/TBRoot", function(err) {
   if(err)
     return console.error(err);
-  fs.copy("src/data/TBRoot", "src/devemu/TBRoot", function(err) {
+  fs.copy(__dirname + "/../src/data/TBRoot", __dirname + "/devemu/TBRoot", function(err) {
     if(err)
       return console.error(err);
     console.log("TBRoot copy done");
+    fs.mkdir(__dirname + "/devemu/TBRoot/TheBall.Interface/InterfaceOperation", function(err) {
+      if(err)
+        return console.error(err);
+    });
   });
 });
 
+var httpOperationDataMessage;
 
 protobuf.load("tbdevserver/tb.proto", function(err, root) {
   if(err)
@@ -44,7 +44,12 @@ protobuf.load("tbdevserver/tb.proto", function(err, root) {
 app.post('/postback', function(request, respond) {
   console.log("Posting...");
   var body = '';
-  var filePath = __dirname + '/public/data.txt';
+  var operationID = "random_id_base";
+  var operationDataFile = operationID + ".data";
+  var operationResultFile = operationID + ".json";
+  var filePath = __dirname + '/devemu/TBRoot/TheBall.Interface/InterfaceOperation/';
+  var operationDataFullPath = filePath + operationDataFile;
+  var operationResultPath = filePath + operationResultFile;
   console.log(filePath);
   request.on('data', function(data) {
     body += data;
@@ -76,9 +81,12 @@ app.post('/postback', function(request, respond) {
       EnvironmentName: "environmentName"
     });
     var buffer = httpOperationDataMessage.encode(message).finish();
-    fs.writeFile(filePath, buffer, function() {
-      respond.end();
-      console.log("Done: " + filePath);
+    fs.writeFile(operationResultPath, "{}", function() {
+      fs.writeFile(operationDataFullPath, buffer, function() {
+        respond.send("{ \"OperationID\": \"" + operationID +  "\" }");
+        respond.end();
+        console.log("Done: " + filePath);
+      });
     });
   });
 });
