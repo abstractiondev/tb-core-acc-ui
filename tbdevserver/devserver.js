@@ -41,10 +41,25 @@ protobuf.load("tbdevserver/tb.proto", function(err, root) {
   httpOperationDataMessage = root.lookup("HttpOperationData");
 });
 
+var timestamp = function() {
+  function pad(n) {return n<10 ? "0"+n : n}
+  function padms(n) {return n<10 ? "00"+n : n<100 ? "0"+n : n}
+  d=new Date()
+  dash="-"
+  colon="_"
+  return d.getFullYear()+dash+
+    pad(d.getMonth()+1)+dash+
+    pad(d.getDate())+"_"+
+    pad(d.getHours())+colon+
+    pad(d.getMinutes())+colon+
+    pad(d.getSeconds())+colon+
+    padms(d.getMilliseconds());
+};
+
 app.post('/postback', function(request, respond) {
   console.log("Posting...");
   var body = '';
-  var operationID = "random_id_base";
+  var operationID =  timestamp(); //"random_id_base";
   var operationDataFile = operationID + ".data";
   var operationResultFile = operationID + ".json";
   var filePath = __dirname + '/devemu/TBRoot/TheBall.Interface/InterfaceOperation/';
