@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TheBallCoreAbstraction xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../node_modules/@theball/appgen/TheBallCore_v1_0.xsd">
+  <InstanceOfTheBall semanticDomainName="CompanyName.DomainName.AppScopeName">
+    <DigitalInterface>
+      <InterfaceModel>
+        <InterfaceObject name="ExampleInterfaceObject" designDesc="">
+          <InterfaceItems>
+            <InterfaceItem name="ExampleProperty" logicalDataType="Text_Short" />
+          </InterfaceItems>
+        </InterfaceObject>
+      </InterfaceModel>
+    </DigitalInterface>
+    <InformationModel>
+      <InformationObject name="ExampleDataObject" designDesc="">
+        <InformationItems>
+          <InformationItem name="ExampleProperty" logicalDataType="Text_Short"/>
+        </InformationItems>
+      </InformationObject>
+    </InformationModel>
+    <Operations>
+      <Operation name="ExampleOperation">
+        <OperationSpec>
+          <Description></Description>
+        </OperationSpec>
+        <Execution>
+          <SequentialExecution>
+          </SequentialExecution>
+        </Execution>
+      </Operation>
+    </Operations>
+  </InstanceOfTheBall>
+</TheBallCoreAbstraction>
+
