@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TheBallCoreAbstraction xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../node_modules/@theball/appgen/TheBallCore_v1_0.xsd">
   <InstanceOfTheBall semanticDomainName="CompanyName.DomainName.AppScopeName">
-    <!--
   <DigitalInterface>
     <InterfaceModel>
       <InterfaceObject name="ExampleInterfaceObject" designDesc="">
@@ -11,7 +10,6 @@
       </InterfaceObject>
     </InterfaceModel>
     </DigitalInterface>
-    -->
     <InformationModel>
       <InformationObject name="ExampleDataObject" designDesc="">
         <InformationItems>
@@ -22,14 +20,18 @@
     <Operations>
       <Operation name="ExampleOperation">
         <OperationSpec>
-          <Description></Description>
+          <Description>Example operation description</Description>
         </OperationSpec>
-        <!--
+        <Parameters>
+          <Parameter name="ExampleInfo" dataType="INT.ExampleInterfaceObject" designDesc="My parameter" state="implemented"/>
+        </Parameters>
         <Execution>
           <SequentialExecution>
+            <TargetDefinition name="myTarget" dataType="ExampleDataObject" designDesc="My example data object" state="implemented">
+              <Parameter name="ExampleInfo" />
+            </TargetDefinition>
           </SequentialExecution>
         </Execution>
-        -->
       </Operation>
     </Operations>
   </InstanceOfTheBall>

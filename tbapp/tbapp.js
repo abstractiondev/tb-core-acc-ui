@@ -18,6 +18,18 @@ var execCmd = execCmdPrefix + absCompilerPath;
 var configPath = __dirname + "/../node_modules/@theball/appgen/AbstractionBuilderContent_v1_0.xml";
 var genRootPath = __dirname + "/absgen";
 
+var copyGenToCS = function(sourceFilePath, targetFileName) {
+  if(isDebug)
+    console.log("Copying CSharp to: " + targetFileName);
+  fs.copySync(__dirname + "/absgen/" + sourceFilePath, __dirname + "/cs/App/" + targetFileName);
+};
+
+var copyGenToTS = function (sourceFilePath, targetFileName) {
+  if(isDebug)
+    console.log("Copying TypeScript to: " + targetFileName);
+  fs.copySync(__dirname + "/absgen/" + sourceFilePath, __dirname + "/../src/app/tbinterface/" + targetFileName);
+};
+
 fs.remove(__dirname + "/absgen", function(err) {
   if(err)
     return console.error(err);
@@ -28,11 +40,17 @@ fs.remove(__dirname + "/absgen", function(err) {
     if(isDebug)
       console.log("Model preparation copy done");
     var stdOut = npmRun.execSync(execCmd + " " + configPath + " " + genRootPath);
-    fs.copySync(__dirname + "/absgen/TheBallCore/Out/AppModel.nggen.ts", __dirname + "/../src/app/tbinterface/AppModel.nggen.ts");
-    fs.copySync(__dirname + "/absgen/TheBallCore/Out/TheBallInterface.nggen.ts", __dirname + "/../src/app/tbinterface/TheBallInterface.nggen.ts");
     if(isDebug) {
       console.log(stdOut.toString());
-    } else {
+    }
+    copyGenToTS("TheBallCore/Out/AppModel.nggen.ts", "AppModel.nggen.ts");
+    copyGenToTS("TheBallCore/Out/TheBallInterface.nggen.ts", "TheBallInterface.nggen.ts");
+    copyGenToCS("Operation/Out/OperationAbstractionFromAppModel.designer.cs", "Operations.gen.cs");
+    //copyGenToCS("TheBallCore/Out/AppModel.serialization.designer.cs", "SerializationClasses.gen.cs");
+    copyGenToCS("TheBallCore/Out/AppModel_dataclass.designer.cs", "DataClasses.gen.cs");
+    copyGenToCS("TheBallCore/Out/AppModel_interface.designer.cs", "Interface.gen.cs");
+    //copyGenToCS("TheBallCore/Out/AppModel_SQLite.designer.cs", "SQLite.gen.cs");
+    if(!isDebug) {
       fs.remove(__dirname + "/absgen");
     }
   });
