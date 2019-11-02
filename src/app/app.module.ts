@@ -6,7 +6,7 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import {CoreModule} from "./core/core.module";
 import {MainviewComponent} from "./account/mainview/mainview.component";
-import {MaterialModule} from "@angular/material";
+import {MatSidenavModule} from "@angular/material";
 import {SidenavComponent} from "./shared/sidenav.component";
 import {GrouplistComponent} from "./account/grouplist/grouplist.component";
 import {AccountService} from "./account/shared/account.service";
@@ -27,7 +27,7 @@ import {AlertModule} from "ng2-bootstrap"
     FormsModule,
     HttpModule,
     CoreModule,
-    MaterialModule.forRoot(),
+    MatSidenavModule,
     AlertModule.forRoot()
   ],
   providers: [

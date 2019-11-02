@@ -42,3 +42,5 @@ Thumbs.db
 tbdevserver/devemu/TBRoot/**
 
 tbapp/absgen/**
+/tbapp/cs/**
+
